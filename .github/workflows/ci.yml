@@ -18,6 +18,7 @@ jobs:
                   java-version: '25'
                   distribution: 'temurin'
             - uses: gradle/wrapper-validation-action@v3
+            - run: chmod +x gradlew
             - run : ./gradlew clean
             - run: ./gradlew compileJava
 
@@ -36,7 +37,7 @@ jobs:
             -   name: Run Tests with IPv4 preference
                 run: ./gradlew test -Djava.net.preferIPv4Stack=true
 
-    
+
     job3:
         needs: job2
         runs-on: ubuntu-latest
