@@ -1,0 +1,48 @@
+plugins {
+    // Java-Unterstützung
+    id 'java'
+    // Ermöglicht das Ausführen der Anwendung via 'gradle run'
+    id 'application'
+    // Spotless Plugin für die Code-Formatierung
+    id 'com.diffplug.spotless' version '6.25.0'
+}
+
+group = 'catcafe'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 6 (Jupiter) Abhängigkeiten
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0-M1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// 1. Konfiguration für main() in catcafe.Main
+application {
+    mainClass = 'catcafe.Main'
+}
+
+// 2. JUnit-Tests mit Gradle ausführen
+test {
+    useJUnitPlatform()
+}
+
+// 3. Spotless Konfiguration (google-java-format + 4 Leerzeichen)
+spotless {
+    java {
+        target 'src/**/*.java'
+
+        // Version 1.22.0 ist zwingend erforderlich für Java 21 Kompatibilität
+        googleJavaFormat('1.34.0')
+
+        indentWithSpaces(4)
+
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+

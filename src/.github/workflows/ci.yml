@@ -1,0 +1,45 @@
+name: GitHub CI
+
+on:
+    # push on master branch
+    push:
+        branches: [master]
+    # manually triggered
+    workflow_dispatch:
+
+jobs:
+
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions/setup-java@v3
+              with:
+                  java-version: '25'
+                  distribution: 'temurin'
+            - uses: gradle/wrapper-validation-action@v1
+            - run: ./gradlew compileJava
+
+    job2:
+        needs: job1
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions/setup-java@v3
+              with:
+                  java-version: '25'
+                  distribution: 'temurin'
+            - uses: gradle/wrapper-validation-action@v1
+            - run: ./gradlew test
+
+    job3:
+        needs: job2
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions/setup-java@v3
+              with:
+                  java-version: '25'
+                  distribution: 'temurin'
+            - uses: gradle/wrapper-validation-action@v1
+            - run:  ./gradlew spotlessCheck

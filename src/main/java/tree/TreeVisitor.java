@@ -7,19 +7,19 @@ package tree;
  */
 public interface TreeVisitor<T extends Comparable<T>> {
 
-    /**
-     * Visit an empty node.
-     *
-     * @param node to visit
-     * @return the result of visiting the node (recursively)
-     */
-    String visit(Empty<T> node);
+  /**
+   * Visit an empty node.
+   *
+   * @param node to visit
+   * @return the result of visiting the node (recursively)
+   */
+  String visit(Empty<T> node);
 
-    /**
-     * Visit a node.
-     *
-     * @param node to visit
-     * @return the result of visiting the node (recursively)
-     */
-    String visit(Node<T> node);
+  /**
+   * Visit a node.
+   *
+   * @param node to visit
+   * @return the result of visiting the node (recursively)
+   */
+  String visit(Node<T> node);
 }
